@@ -27,6 +27,56 @@
 				center: {lat: 33.555400, lng: -117.138700},
 				zoom: 13
 			});
+
+			var wineries = [
+				{title: 'South Coast', location: {lat: 33.533774, lng: -117.051810}},
+				{title: 'Callaway', location: {lat: 33.524399, lng: -117.089251}},
+				{title: 'Leoness Cellars', location: {lat: 33.523958, lng: -117.017651}},
+				{title: 'Thornton', location: {lat: 33.519386, lng: -117.089080}},
+				{title: 'Miramonte', location: {lat: 33.525575, lng: -117.077964}},
+				{title: 'Ponte', location: {lat: 33.536736, lng: -117.050542}},
+				{title: 'Falkner', location: {lat: 33.533946, lng: -117.066249}},
+				{title: 'Wilson Creek', location: {lat: 33.547217, lng: -117.044748}},
+				{title: 'Wiens', location: {lat: 33.538353, lng: -117.047952}},
+				{title: 'Renzoni', location: {lat: 33.511751, lng: -117.019438}},
+				{title: 'Danza Del Sol', location: {lat: 33.531294, lng: -117.014438}},
+				{title: 'Lorimar', location: {lat: 33.539475, lng: -117.058735}}
+			]
+
+			var largeInfoWindow = new google.maps.InfoWindow();
+			var bounds = new google.maps.LatLngBounds();
+
+			for (var i = 0; i < wineries.length; i++) {
+				var position = wineries[i].location;
+				var title = wineries[i].title;
+				var marker = new google.maps.Marker({
+					map: map,
+					position: position,
+					title: title,
+					animation: google.maps.Animation.DROP,
+					id: i
+				});
+
+				markers.push(marker);
+				bounds.extend(marker.position);
+
+				marker.addListener('click', function() {
+					populateInfoWindow(this, largeInfoWindow);
+				});
+			}
+			map.fitBounds(bounds);
+		}
+
+		function populateInfoWindow(marker, infowindow) {
+			if (infowindow.marker != marker) {
+				infowindow.marker = marker;
+				infowindow.setContent('<div>' + marker.title + '</div>');
+				infowindow.open(map, marker);
+				infowindow.addListener('closeclick', function() {
+					infowindow.setMarker(null);
+				});
+			}
+		}
 	</script>
 
 
