@@ -4,4 +4,4 @@
 > display markers on a map
 
 
-### Run index.html in thw browser to run app
+##### Run index.html in the browser to run app
