@@ -44,7 +44,10 @@
 			<input id="show-wineries" type="button" value="Show Wineries">
 			<input id="hide-wineries" type="button" value="Hide Wineries">
 		</div>
-
+		<div>
+			<input id="show-bars" type="button" value="Show Bars">
+			<input id="hide-bars" type="button" value="Hide Bars">
+		</div>
 	</div>
 
 	<div id="map"></div>
@@ -54,7 +57,7 @@
 		var map;
 		// Create a blank array for all markers
 		var wineMarkers = [];
-
+		var barMarkers = [];
 
 		var wineries = [
 			{title: 'South Coast', location: {lat: 33.533774, lng: -117.051810}},
@@ -71,7 +74,15 @@
 			{title: 'Lorimar', location: {lat: 33.539475, lng: -117.058735}}
 		]
 
-
+		var bars = [
+			{title: 'The Shamrock', location: {lat: 33.549817, lng: -117.139526}},
+			{title: 'Wings n Things', location: {lat: 33.568187, lng: -117.204339}},
+			{title: 'Ballast Point', location: {lat: 33.497864, lng: -117.156708}},
+			{title: 'Karl Straus', location: {lat: 33.524828, lng: -117.159033}},
+			{title: '8 Bit', location: {lat: 33.529772, lng: -117.176229}},
+			{title: 'Buffalo Wild Wings', location: {lat: 33.554276, lng: -117.179436}},
+			{title: 'Garage', location: {lat: 33.482466, lng: -117.143497}}
+		]
 
 		function initMap() {
 
@@ -112,8 +123,24 @@
 				});
 			}
 
+			for (var i = 0; i < bars.length; i++) {
+				var position = bars[i].location;
+				var title = bars[i].title;
+				var marker = new google.maps.Marker({
+					position: position,
+					title: title,
+					animation: google.maps.Animation.DROP,
+					id: i,
+					icon: barimg
+				});
 
-			// FOR BAR LOOP
+				barMarkers.push(marker);
+				bounds.extend(marker.position);
+
+				marker.addListener('click', function() {
+					populateInfoWindow(this, largeInfoWindow);
+				});
+			}
 
 			document.getElementById('show-wineries').addEventListener('click', showWineries);
 			document.getElementById('hide-wineries').addEventListener('click', hideWineries);
@@ -173,8 +200,21 @@
 			}
 		}
 
-		// FOR BAR FUNCTIONS
+		function showBars() {
+			var bounds = new google.maps.LatLngBounds();
+			for (var i = 0; i < bars.length; i++) {
+				barMarkers[i].setMap(map);
+				bounds.extend(barMarkers[i].position);
+			}
+			// map.fitBounds(bounds);
+		}
 
+		function hideBars() {
+			for (var i = 0; i < bars.length; i++) {
+				barMarkers[i].setMap(null);
+			}
+		}
+		
 	</script>
 
 
