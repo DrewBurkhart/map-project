@@ -5,25 +5,28 @@
 > map plots popular locations in the Temecula
 > Valley.
 
-# To Run:
+## To Run
 
-### Run index.html in the browser to run app
+Run index.html in the browser to run app
 
-
-
-# Files:
+## Files
 
 ### index.html
-##### Main HTML file for app structure
+
+Main HTML file for app structure
 
 ### index.styl
-##### Main Stylus file for app styling
+
+Main Stylus file for app styling
 
 ### index.css
-##### CSS output from Stylus file
+
+CSS output from Stylus file
 
 ### map.js
-##### Main JavaScript file for app functonality
+
+Main JavaScript file for app functonality
 
 ### /img
-##### Image library for map markers
+
+Image library for map markers
