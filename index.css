@@ -1,7 +1,7 @@
 html,
 body {
   font-family: Arial, sans-serif;
-  background-color: #808080;
+  background-color: #222;
   height: 100%;
   margin: 0;
   color: #fff;
@@ -14,7 +14,7 @@ body {
   right: 0px;
 }
 .options-box {
-  background: #000;
+  background: #222;
   height: 100%;
   line-height: 35px;
   padding: 10px 10px 30px 10px;
