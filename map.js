@@ -1,31 +1,31 @@
 var map;
 // Create a blank array for all markers
-var wineMarkers = [];
+var brewMarkers = [];
 var barMarkers = [];
 var restMarkers = [];
 var coffeeMarkers = [];
 
-var wineries = [
-    {title: 'South Coast', location: {lat: 33.533774, lng: -117.051810}},
-    {title: 'Callaway', location: {lat: 33.524399, lng: -117.089251}},
-    {title: 'Leoness Cellars', location: {lat: 33.523958, lng: -117.017651}},
-    {title: 'Thornton', location: {lat: 33.519386, lng: -117.089080}},
-    {title: 'Miramonte', location: {lat: 33.525575, lng: -117.077964}},
-    {title: 'Ponte', location: {lat: 33.536736, lng: -117.050542}},
-    {title: 'Falkner', location: {lat: 33.533946, lng: -117.066249}},
-    {title: 'Wilson Creek', location: {lat: 33.547217, lng: -117.044748}},
-    {title: 'Wiens', location: {lat: 33.538353, lng: -117.047952}},
-    {title: 'Renzoni', location: {lat: 33.511751, lng: -117.019438}},
-    {title: 'Danza Del Sol', location: {lat: 33.531294, lng: -117.014438}},
-    {title: 'Lorimar', location: {lat: 33.539475, lng: -117.058735}}
+var breweries = [
+    {title: 'Copper Kettle', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Denver Beer Co', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Grandmas House', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Dry Dock South', location: {lat: 39.652681, lng: -104.812040}},
+    {title: 'Dry Dock North', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Ale House', location: {lat: 39.740246, lng: -104.989728}},
+    {title: '', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'The Source', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Tap 14', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Forest Room 5', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Comrade', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Great Divide', location: {lat: 39.740246, lng: -104.989728}}
 ]
 
 var bars = [
-    {title: 'The Shamrock', location: {lat: 33.549817, lng: -117.139526}},
-    {title: 'Wings n Things', location: {lat: 33.568187, lng: -117.204339}},
-    {title: 'Ballast Point', location: {lat: 33.497864, lng: -117.156708}},
-    {title: 'Karl Straus', location: {lat: 33.524828, lng: -117.159033}},
-    {title: '8 Bit', location: {lat: 33.529772, lng: -117.176229}},
+    {title: 'Lodos', location: {lat: 33.549817, lng: -117.139526}},
+    {title: 'Buffalo Wild Wings', location: {lat: 33.568187, lng: -117.204339}},
+    {title: 'Lingers', location: {lat: 33.497864, lng: -117.156708}},
+    {title: 'Tap 14', location: {lat: 33.524828, lng: -117.159033}},
+    {title: 'The Source', location: {lat: 33.529772, lng: -117.176229}},
     {title: 'Buffalo Wild Wings', location: {lat: 33.554276, lng: -117.179436}},
     {title: 'Garage', location: {lat: 33.482466, lng: -117.143497}}
 ]
@@ -336,8 +336,8 @@ function initMap() {
 
     // Constructor creats a new map -- only center and zoom are required
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 33.535400, lng: -117.108700},
-        zoom: 12,
+        center: {lat: 39.740246, lng: -104.989728},
+        zoom: 10,
         // mapTypeId: 'hybrid'
         styles: styles,
         // mapTypeControl: false
@@ -348,23 +348,23 @@ function initMap() {
     var largeInfoWindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds();
     
-    var wineimg = 'img/purple_MarkerW.png';
+    var brewimg = 'img/purple_MarkerW.png';
     var barimg = 'img/blue_MarkerB.png';
     var restimg = 'img/red_MarkerR.png';
     var coffeeimg = 'img/brown_MarkerC.png';
 
-    for (var i = 0; i < wineries.length; i++) {
-        var position = wineries[i].location;
-        var title = wineries[i].title;
+    for (var i = 0; i < breweries.length; i++) {
+        var position = breweries[i].location;
+        var title = breweries[i].title;
         var marker = new google.maps.Marker({
             position: position,
             title: title,
             animation: google.maps.Animation.DROP,
             id: i,
-            icon: wineimg
+            icon: brewimg
         });
 
-        wineMarkers.push(marker);
+        brewMarkers.push(marker);
         bounds.extend(marker.position);
 
         marker.addListener('click', function() {
@@ -429,8 +429,8 @@ function initMap() {
         });
     }
 
-    document.getElementById('show-wineries').addEventListener('click', showWineries);
-    document.getElementById('hide-wineries').addEventListener('click', hideWineries);
+    document.getElementById('show-breweries').addEventListener('click', showBreweries);
+    document.getElementById('hide-breweries').addEventListener('click', hideBreweries);
     document.getElementById('show-bars').addEventListener('click', showBars);
     document.getElementById('hide-bars').addEventListener('click', hideBars);
     document.getElementById('show-rests').addEventListener('click', showRests);
@@ -476,18 +476,18 @@ function populateInfoWindow(marker, infowindow) {
     }
 }
 
-function showWineries() {
+function showBreweries() {
     var bounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < wineries.length; i++) {
-        wineMarkers[i].setMap(map);
-        bounds.extend(wineMarkers[i].position);
+    for (var i = 0; i < breweries.length; i++) {
+        brewMarkers[i].setMap(map);
+        bounds.extend(brewMarkers[i].position);
     }
     // map.fitBounds(bounds);
 }
 
-function hideWineries() {
-    for (var i = 0; i < wineries.length; i++) {
-        wineMarkers[i].setMap(null);
+function hideBreweries() {
+    for (var i = 0; i < breweries.length; i++) {
+        brewMarkers[i].setMap(null);
     }
 }
 

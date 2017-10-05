@@ -2,8 +2,8 @@
 
 > KnockoutJS project using Google Maps API to
 > display markers on a map. The interactive
-> map plots popular locations in the Temecula
-> Valley.
+> map plots popular locations in the Denver
+> Metro Area.
 
 ## To Run
 
