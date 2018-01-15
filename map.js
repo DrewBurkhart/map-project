@@ -1,337 +1,339 @@
 var map;
 // Create a blank array for all markers
-var brewMarkers = [];
+var sightsMarkers = [];
 var barMarkers = [];
 var restMarkers = [];
 var coffeeMarkers = [];
+var techMarkers = [];
 
-var breweries = [
-    {title: 'Copper Kettle', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Denver Beer Co', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Grandmas House', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Dry Dock South', location: {lat: 39.652681, lng: -104.812040}},
-    {title: 'Dry Dock North', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Ale House', location: {lat: 39.740246, lng: -104.989728}},
-    {title: '', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'The Source', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Tap 14', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Forest Room 5', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Comrade', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Great Divide', location: {lat: 39.740246, lng: -104.989728}}
+var sights = [
+    {title: 'Palace of Fine Arts', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Pier 39', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Coit Tower', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'AT&T Park', location: {lat: 39.652681, lng: -104.812040}},
+    {title: 'Ghiradelli Square', location: {lat: 39.756526, lng: -104.773265}},
+    {title: 'Golden Gate Park', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Painted Ladies', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Golden Gate Bridge', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Lombard Street', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'SF Museum of Modern Art', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Lands End Labyrinth', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'The Castro Theatre', location: {lat: 39.740246, lng: -104.989728}},
+    {title: 'Baker Beach', location: {lat: 39.740246, lng: -104.989728}}
 ]
 
 var bars = [
-    {title: 'Lodos', location: {lat: 33.549817, lng: -117.139526}},
-    {title: 'Buffalo Wild Wings', location: {lat: 33.568187, lng: -117.204339}},
-    {title: 'Lingers', location: {lat: 33.497864, lng: -117.156708}},
-    {title: 'Tap 14', location: {lat: 33.524828, lng: -117.159033}},
-    {title: 'The Source', location: {lat: 33.529772, lng: -117.176229}},
-    {title: 'Buffalo Wild Wings', location: {lat: 33.554276, lng: -117.179436}},
-    {title: 'Garage', location: {lat: 33.482466, lng: -117.143497}}
+    {title: 'Smugglers Cove', location: {lat: 37.779457, lng: -122.423396}},
+    {title: 'Buddha Lounge', location: {lat: 37.795313, lng: -122.406670}},
+    {title: 'The Buena Vista', location: {lat: 37.806547, lng: -122.420778}},
+    {title: 'Final Final', location: {lat: 37.798568, lng: -122.445812}},
+    {title: 'The House of Shields', location: {lat: 37.788304, lng: -122.401344}},
+    {title: 'The Interval', location: {lat: 37.806629, lng: -122.432167}},
+    {title: 'Red\'s Java House', location: {lat: 37.787257, lng: -122.387431}}
 ]
 
 var rests = [
-    {title: 'A Carini\'s', location: {lat: 33.557100, lng: -117.201540}},
-    {title: 'One Sushi', location: {lat: 33.556702, lng: -117.178050}},
-    {title: 'Tonino\'s', location: {lat: 33.565878, lng: -117.212195}}
+    {title: 'Saison', location: {lat: 37.779569, lng: -122.392263}},
+    {title: 'Leo\'s Oyster Bar', location: {lat: 37.794066, lng: -122.402528}},
+    {title: 'Swan Oyster Depot', location: {lat: 37.790929, lng: -122.420987}}
 ]
 
 var coffee = [
-    {title: 'Starbucks', location: {lat: 33.566305, lng: -117.204511}},
-    {title: 'Maui Wowi', location: {lat: 33.504540, lng: -117.151429}}
+    {title: 'Philz Coffee', location: {lat: 37.789079, lng: -122.393178}},
+    {title: 'Wrecking Ball Coffee Roasters', location: {lat: 37.796835, lng: -122.436640}}
 ]
 
 function initMap() {
 
     var styles = [
-{
-"featureType": "all",
-"elementType": "all",
-"stylers": [
-    {
-        "hue": "#ff0000"
-    },
-    {
-        "saturation": -100
-    },
-    {
-        "lightness": -30
-    }
-]
-},
-{
-"featureType": "all",
-"elementType": "labels.text.fill",
-"stylers": [
-    {
-        "color": "#ffffff"
-    }
-]
-},
-{
-"featureType": "all",
-"elementType": "labels.text.stroke",
-"stylers": [
-    {
-        "color": "#353535"
-    }
-]
-},
-{
-"featureType": "administrative",
-"elementType": "geometry",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "administrative",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "administrative.land_parcel",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "landscape",
-"elementType": "geometry",
-"stylers": [
-    {
-        "color": "#656565"
-    }
-]
-},
-{
-"featureType": "landscape",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "landscape.man_made",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "landscape.natural",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "poi",
-"elementType": "geometry.fill",
-"stylers": [
-    {
-        "color": "#505050"
-    }
-]
-},
-{
-"featureType": "poi",
-"elementType": "geometry.stroke",
-"stylers": [
-    {
-        "color": "#808080"
-    }
-]
-},
-{
-"featureType": "poi",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "poi.attraction",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "poi.park",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "off"
-    }
-]
-},
-{
-"featureType": "poi.sports_complex",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "road",
-"elementType": "all",
-"stylers": [
-    {
-        "color": "#454545"
-    }
-]
-},
-{
-"featureType": "road",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "simplified"
-    },
-    {
-        "invert_lightness": true
-    }
-]
-},
-{
-"featureType": "road",
-"elementType": "labels.icon",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "road.highway",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "simplified"
-    },
-    {
-        "invert_lightness": true
-    }
-]
-},
-{
-"featureType": "road.highway",
-"elementType": "labels.icon",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "road.highway.controlled_access",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "road.arterial",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "simplified"
-    }
-]
-},
-{
-"featureType": "road.arterial",
-"elementType": "labels.icon",
-"stylers": [
-    {
-        "visibility": "off"
-    }
-]
-},
-{
-"featureType": "road.local",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "simplified"
-    }
-]
-},
-{
-"featureType": "road.local",
-"elementType": "labels.icon",
-"stylers": [
-    {
-        "visibility": "off"
-    }
-]
-},
-{
-"featureType": "transit",
-"elementType": "labels",
-"stylers": [
-    {
-        "hue": "#ff0000"
-    },
-    {
-        "saturation": 100
-    },
-    {
-        "lightness": -40
-    },
-    {
-        "invert_lightness": true
-    },
-    {
-        "gamma": 1.5
-    },
-    {
-        "visibility": "off"
-    }
-]
-},
-{
-"featureType": "transit.station",
-"elementType": "all",
-"stylers": [
-    {
-        "visibility": "on"
-    }
-]
-},
-{
-"featureType": "transit.station",
-"elementType": "labels",
-"stylers": [
-    {
-        "visibility": "off"
-    }
-]
-}
+        {
+        "featureType": "all",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#ff0000"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": -30
+            }
+        ]
+        },
+        {
+        "featureType": "all",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+        },
+        {
+        "featureType": "all",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#353535"
+            }
+        ]
+        },
+        {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "administrative",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "administrative.land_parcel",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#656565"
+            }
+        ]
+        },
+        {
+        "featureType": "landscape",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "landscape.man_made",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "landscape.natural",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "poi",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#505050"
+            }
+        ]
+        },
+        {
+        "featureType": "poi",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#808080"
+            }
+        ]
+        },
+        {
+        "featureType": "poi",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "poi.attraction",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "poi.park",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+        },
+        {
+        "featureType": "poi.sports_complex",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#454545"
+            }
+        ]
+        },
+        {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            },
+            {
+                "invert_lightness": true
+            }
+        ]
+        },
+        {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "road.highway",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            },
+            {
+                "invert_lightness": true
+            }
+        ]
+        },
+        {
+        "featureType": "road.highway",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "road.arterial",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+        },
+        {
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+        },
+        {
+        "featureType": "road.local",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+        },
+        {
+        "featureType": "road.local",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+        },
+        {
+        "featureType": "transit",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "hue": "#ff0000"
+            },
+            {
+                "saturation": 100
+            },
+            {
+                "lightness": -40
+            },
+            {
+                "invert_lightness": true
+            },
+            {
+                "gamma": 1.5
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+        },
+        {
+        "featureType": "transit.station",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+        },
+        {
+        "featureType": "transit.station",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+        }
 ]
 
     // Constructor creats a new map -- only center and zoom are required
@@ -348,14 +350,15 @@ function initMap() {
     var largeInfoWindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds();
     
-    var brewimg = 'img/purple_MarkerW.png';
+    var sightimg = 'img/purple_MarkerW.png';
     var barimg = 'img/blue_MarkerB.png';
     var restimg = 'img/red_MarkerR.png';
     var coffeeimg = 'img/brown_MarkerC.png';
+    var techimg = 'img/brown_MarkerC.png';
 
-    for (var i = 0; i < breweries.length; i++) {
-        var position = breweries[i].location;
-        var title = breweries[i].title;
+    for (var i = 0; i < sights.length; i++) {
+        var position = sights[i].location;
+        var title = sights[i].title;
         var marker = new google.maps.Marker({
             position: position,
             title: title,
@@ -364,7 +367,7 @@ function initMap() {
             icon: brewimg
         });
 
-        brewMarkers.push(marker);
+        sightMarkers.push(marker);
         bounds.extend(marker.position);
 
         marker.addListener('click', function() {
