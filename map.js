@@ -1,6 +1,6 @@
 var map;
 // Create a blank array for all markers
-var sightsMarkers = [];
+var sightMarkers = [];
 var barMarkers = [];
 var restMarkers = [];
 var coffeeMarkers = [];
@@ -334,7 +334,7 @@ function initMap() {
             }
         ]
         }
-]
+    ]
 
     // Constructor creats a new map -- only center and zoom are required
     map = new google.maps.Map(document.getElementById('map'), {
@@ -364,7 +364,7 @@ function initMap() {
             title: title,
             animation: google.maps.Animation.DROP,
             id: i,
-            icon: brewimg
+            icon: sightimg
         });
 
         sightMarkers.push(marker);
@@ -432,8 +432,8 @@ function initMap() {
         });
     }
 
-    document.getElementById('show-breweries').addEventListener('click', showBreweries);
-    document.getElementById('hide-breweries').addEventListener('click', hideBreweries);
+    document.getElementById('show-sights').addEventListener('click', showSights);
+    document.getElementById('hide-sights').addEventListener('click', hideSights);
     document.getElementById('show-bars').addEventListener('click', showBars);
     document.getElementById('hide-bars').addEventListener('click', hideBars);
     document.getElementById('show-rests').addEventListener('click', showRests);
@@ -479,18 +479,18 @@ function populateInfoWindow(marker, infowindow) {
     }
 }
 
-function showBreweries() {
+function showSights() {
     var bounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < breweries.length; i++) {
-        brewMarkers[i].setMap(map);
-        bounds.extend(brewMarkers[i].position);
+    for (var i = 0; i < sights.length; i++) {
+        sightMarkers[i].setMap(map);
+        bounds.extend(sightMarkers[i].position);
     }
-    // map.fitBounds(bounds);
+    map.fitBounds(bounds);
 }
 
-function hideBreweries() {
-    for (var i = 0; i < breweries.length; i++) {
-        brewMarkers[i].setMap(null);
+function hideSights() {
+    for (var i = 0; i < sights.length; i++) {
+        sightMarkers[i].setMap(null);
     }
 }
 
@@ -500,7 +500,7 @@ function showBars() {
         barMarkers[i].setMap(map);
         bounds.extend(barMarkers[i].position);
     }
-    // map.fitBounds(bounds);
+    map.fitBounds(bounds);
 }
 
 function hideBars() {
@@ -515,7 +515,7 @@ function showRests() {
         restMarkers[i].setMap(map);
         bounds.extend(restMarkers[i].position);
     }
-    // map.fitBounds(bounds);
+    map.fitBounds(bounds);
 }
 
 function hideRests() {
@@ -530,7 +530,7 @@ function showCoffee() {
         coffeeMarkers[i].setMap(map);
         bounds.extend(coffeeMarkers[i].position);
     }
-    // map.fitBounds(bounds);
+    map.fitBounds(bounds);
 }
 
 function hideCoffee() {
