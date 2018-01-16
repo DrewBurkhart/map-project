@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="index.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Cutive+Mono|Dancing+Script|Poiret+One" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
 
-	<div class="options-box">
+	<div class="options-box" data-bind:"foreach: type">
+		<div>
+			<h4 data-bind:"text: type.name"></h4>
+			<input data-bind:"click: showType" type="button" value="Show">
+			<input data-bind:"click: hideType" type="button" value="Hide">
+		</div>
+	</div>
+
 		<!-- <h2>The Valley</h2> -->
 		<div>
 			<h4 id="sight">Sights</h4>
@@ -34,11 +41,16 @@
 	<div id="map"></div>
 
 	</div>
-	<script async defer src="map.js"></script>
+	<script async defer src="js/map.js"></script>
+	<script async defer src="js/model/locations.js"></script>
+	<script async defer src="js/model/mapStyles.js"></script>
 
 
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyBhX7NPalvf8PioHpldC9atBqVdHVXtCpE&v=3&callback=initMap">
+	</script>
+	<script async defer
+	src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js">
 	</script>
 
 </body>
