@@ -1,16 +1,10 @@
 var map;
-// Create a blank array for all markers
-var sightMarkers = [];
-var barMarkers = [];
-var restMarkers = [];
-var coffeeMarkers = [];
-var techMarkers = [];
 
 function initMap() {
 
     var styles = mapStyles;
 
-    // Constructor creats a new map -- only center and zoom are required
+    // Constructor creates a new map -- only center and zoom are required
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.810750, lng: -122.477250},
         zoom: 10,
@@ -23,87 +17,26 @@ function initMap() {
 
     var largeInfoWindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds();
+
+    for (var n = 0; n < locTypes.length; n++) {
+        for (var i = 0; i < locTypes[n].locs[i].length; i++) {
+            var position = locTypes[n].locs[i].location;
+            var title = locTypes[n].locs[i].title;
+            var marker = new google.maps.Marker({
+                position: position,
+                title: title,
+                animation: google.maps.Animation.DROP,
+                id: i,
+                icon: locTypes[n].locs[i].img
+            });
     
-    var sightimg = 'img/purple_MarkerW.png';
-    var barimg = 'img/blue_MarkerB.png';
-    var restimg = 'img/red_MarkerR.png';
-    var coffeeimg = 'img/brown_MarkerC.png';
-    var techimg = 'img/brown_MarkerC.png';
-
-    for (var i = 0; i < sights.length; i++) {
-        var position = sights[i].location;
-        var title = sights[i].title;
-        var marker = new google.maps.Marker({
-            position: position,
-            title: title,
-            animation: google.maps.Animation.DROP,
-            id: i,
-            icon: sightimg
-        });
-
-        sightMarkers.push(marker);
-        bounds.extend(marker.position);
-
-        marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfoWindow);
-        });
-    }
-
-    for (var i = 0; i < bars.length; i++) {
-        var position = bars[i].location;
-        var title = bars[i].title;
-        var marker = new google.maps.Marker({
-            position: position,
-            title: title,
-            animation: google.maps.Animation.DROP,
-            id: i,
-            icon: barimg
-        });
-
-        barMarkers.push(marker);
-        bounds.extend(marker.position);
-
-        marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfoWindow);
-        });
-    }
-
-    for (var i = 0; i < rests.length; i++) {
-        var position = rests[i].location;
-        var title = rests[i].title;
-        var marker = new google.maps.Marker({
-            position: position,
-            title: title,
-            animation: google.maps.Animation.DROP,
-            id: i,
-            icon: restimg
-        });
-
-        restMarkers.push(marker);
-        bounds.extend(marker.position);
-
-        marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfoWindow);
-        });
-    }
-
-    for (var i = 0; i < coffee.length; i++) {
-        var position = coffee[i].location;
-        var title = coffee[i].title;
-        var marker = new google.maps.Marker({
-            position: position,
-            title: title,
-            animation: google.maps.Animation.DROP,
-            id: i,
-            icon: coffeeimg
-        });
-
-        coffeeMarkers.push(marker);
-        bounds.extend(marker.position);
-
-        marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfoWindow);
-        });
+            locTypes[n].markers.push(marker);
+            bounds.extend(marker.position);
+    
+            marker.addListener('click', function() {
+                populateInfoWindow(this, largeInfoWindow);
+            });
+        }
     }
 
     document.getElementById('show-sights').addEventListener('click', showSights);
