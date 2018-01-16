@@ -7,19 +7,19 @@ var coffeeMarkers = [];
 var techMarkers = [];
 
 var sights = [
-    {title: 'Palace of Fine Arts', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Pier 39', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Coit Tower', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'AT&T Park', location: {lat: 39.652681, lng: -104.812040}},
-    {title: 'Ghiradelli Square', location: {lat: 39.756526, lng: -104.773265}},
-    {title: 'Golden Gate Park', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Painted Ladies', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Golden Gate Bridge', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Lombard Street', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'SF Museum of Modern Art', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Lands End Labyrinth', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'The Castro Theatre', location: {lat: 39.740246, lng: -104.989728}},
-    {title: 'Baker Beach', location: {lat: 39.740246, lng: -104.989728}}
+    {title: 'Palace of Fine Arts', location: {lat: 37.802025, lng: -122.448667}},
+    {title: 'Pier 39', location: {lat: 37.808724, lng: -122.409810}},
+    {title: 'Coit Tower', location: {lat: 37.802420, lng: -122.405822}},
+    {title: 'AT&T Park', location: {lat: 37.778637, lng: -122.389259}},
+    {title: 'Ghiradelli Square', location: {lat: 37.805910, lng: -122.422939}},
+    {title: 'Golden Gate Park', location: {lat: 37.769412, lng: -122.486225}},
+    {title: 'Painted Ladies', location: {lat: 37.776293, lng: -122.432758}},
+    {title: 'Golden Gate Bridge', location: {lat: 37.810752, lng: -122.477291}},
+    {title: 'Lombard Street', location: {lat: 37.802009, lng: -122.419542}},
+    {title: 'SF Museum of Modern Art', location: {lat: 37.785794, lng: -122.401055}},
+    {title: 'Lands End Labyrinth', location: {lat: 37.788049, lng: -122.505824}},
+    {title: 'The Castro Theatre', location: {lat: 37.762059, lng: -122.434784}},
+    {title: 'Baker Beach', location: {lat: 37.797552, lng: -122.481992}}
 ]
 
 var bars = [
@@ -338,7 +338,7 @@ function initMap() {
 
     // Constructor creats a new map -- only center and zoom are required
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 39.740246, lng: -104.989728},
+        center: {lat: 37.740246, lng: -122.989728},
         zoom: 10,
         // mapTypeId: 'hybrid'
         styles: styles,
@@ -457,6 +457,11 @@ function populateInfoWindow(marker, infowindow) {
                 var nearStreetViewLoc = data.location.latLng;
                 var heading = google.maps.geometry.spherical.computeHeading(
                     nearStreetViewLoc, marker.position);
+                if (data.location.description == "Baker Beach") {
+                    heading = 0
+                } else if (data.location.description == "AT&T Park") {
+                    heading = 90
+                }
                 infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>');
                     var panoramaOptions = {
                         position: nearStreetViewLoc,
