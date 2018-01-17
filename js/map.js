@@ -17,6 +17,9 @@ var Loc = function(data) {
         map: map
     });
 
+    /* TODO: ALLOW LIST TO BE CLICKABLE SO THAT USERS
+        CAN FIND THE MARKER BY CLICKING ON THE LIST
+        ITEM */
     this.showMarker = ko.computed(function() {
         if(this.visible() === true) {
             this.marker.setMap(map);
@@ -26,6 +29,7 @@ var Loc = function(data) {
         return true;
     }, this);
 
+    // BUG: STREET VIEW DOES NOT POPULATE
     function populateInfoWindow(marker, infowindow) {
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
@@ -75,7 +79,7 @@ function mapError() {
 function MapVM() {
     var self = this;
     // TODO: ALLOW MAP STYLES TO BE CHANGED BY USER
-    var styles = mapStyles2;
+    //var styles = mapStyles2;
     var locs = initLocs;
 
     this.toggleSymbol = ko.observable('hide');
@@ -87,7 +91,7 @@ function MapVM() {
         center: {lat: 37.780000, lng: -122.459500},
         zoom: 13,
         //mapTypeId: 'hybrid',
-        styles: styles,
+        //styles: styles,
         mapTypeControl: false
     });
     map.setTilt(45);
