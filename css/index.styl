@@ -1,41 +1,50 @@
 $full = 100%
-$bkg = #222222
+$bkg = #193549
+$txt = #FFC600
 
-html, body 
-    font-family Arial, sans-serif
+html, body, #map 
     background-color $bkg
     height $full
     margin 0
-    color #fff
+    padding 0
+    color $txt
 
-#map 
-    bottom 0px
-    height $full
-    left 320px
+body
+    position relative
+
+.search 
+    background-color $bkg
+    color $txt
     position absolute
-    right 0px
+    bottom 10px
+    left 10px
+    padding 10px 5px
+    border-radius 4px
+    border 2px solid $txt
+    width 25%
 
-.options-box 
-    background $bkg
-    height $full
-    line-height 35px
-    padding 10px 10px 30px 10px
-    text-align left
-    width 300px
-    color #fff
+input
+    width 80%
+    padding 10px
 
-#pano 
-    width 400px
-    height 400px
+.hideShowToggle
+    position absolute
+    top 5px
+    right 10px
 
-#brew 
-    font-family 'Dancing Script', cursive
+.list
+    position absolute
+    top 10px
+    left 10px
+    background-color $bkg
+    color $txt
+    border 2px solid $txt
+    padding 15px 10px
+    width 15%
 
-#bar 
-    font-family 'Architects Daughter', cursive
+ul
+    list-style-type none
+    display inline
 
-#rest 
-    font-family 'Poiret One', cursive
-
-#coffee 
-    font-family 'Cutive Mono', monospace
+h1
+    margin 0

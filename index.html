@@ -1,56 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Neighborhood Map</title>
 	<link href="css/index.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Cutive+Mono|Dancing+Script|Poiret+One" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container">
+	<div class="map" id="map"></div>
 
-	<div class="options-box" data-bind:"foreach: type">
-		<div>
-			<h4 data-bind:"text: types.name"></h4>
-			<input data-bind:"click: showType" type="button" value="Show">
-			<input data-bind:"click: hideType" type="button" value="Hide">
-		</div>
+    <!-- Search -->
+    <div class="search" id="search">
+		<input placeholder="Search Your Place of Interest" class="search-box" id="search-box" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
 	</div>
 
-		<!-- <h2>The Valley</h2> -->
-		<div>
-			<h4 id="sight">Sights</h4>
-			<input id="show-sights" type="button" value="Show">
-			<input id="hide-sights" type="button" value="Hide">
-		</div>
-		<div>
-			<h4 id="bar">Bars</h4>
-			<input id="show-bars" type="button" value="Show">
-			<input id="hide-bars" type="button" value="Hide">
-		</div>
-		<div>
-			<h4 id="rest">Restaurants</h4>
-			<input id="show-rests" type="button" value="Show">
-			<input id="hide-rests" type="button" value="Hide">
-		</div>
-		<div>
-			<h4 id="coffee">Coffee Shops</h4>
-			<input id="show-coffee" type="button" value="Show">
-			<input id="hide-coffee" type="button" value="Hide">
+	<!-- List -->
+	<div class="list text-center" id="list">
+		<span class="hideShowToggle" data-bind="text: toggleSymbol, click: listToggle">hide</span>
+		<div data-bind="visible: toggleSymbol() === 'hide'">
+			<h1>Places</h1>
+			<hr>
+			<ul class="results" id="results" data-bind="visible: toggleSymbol() === 'hide', foreach: filteredList">
+				<li class="place" id="place" data-bind="text: name"></li>
+			</ul>
 		</div>
 	</div>
-
-	<div id="map"></div>
-
-	</div>
-	<script async defer src="js/map.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script async defer src="js/model/locs.js"></script>
 	<script async defer src="js/model/mapStyles.js"></script>
-
+	<script async defer src="js/map.js"></script>
 
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyBhX7NPalvf8PioHpldC9atBqVdHVXtCpE&v=3&callback=initMap">
-	</script>
-	<script async defer
-	src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js">
+		src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyBhX7NPalvf8PioHpldC9atBqVdHVXtCpE&v=3&callback=App" onerror="mapError()">
 	</script>
 
 </body>
