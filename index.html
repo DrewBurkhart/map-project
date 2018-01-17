@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Neighborhood Map</title>
+	<title>Job Map</title>
 	<link href="css/index.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Cutive+Mono|Dancing+Script|Poiret+One" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,7 +20,7 @@
 	<div class="list text-center" id="list">
 		<span class="hideShowToggle" data-bind="text: toggleSymbol, click: listToggle">hide</span>
 		<div data-bind="visible: toggleSymbol() === 'hide'">
-			<h1>Places</h1>
+			<h1>Jobs</h1>
 			<hr>
 			<ul class="results" id="results" data-bind="visible: toggleSymbol() === 'hide', foreach: filteredList">
 				<li class="place" id="place" data-bind="text: name"></li>
