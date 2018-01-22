@@ -1,7 +1,7 @@
 var map;
 var Loc = function(data) {
 
-    var largeInfoWindow = new google.maps.InfoWindow();
+    var largeInfoWindow = new google.maps.InfoWindow({minWidth:300});
     var bounds = new google.maps.LatLngBounds();
 
     var self = this;
@@ -10,6 +10,17 @@ var Loc = function(data) {
     this.long = data.location.lng;
 
     this.visible = ko.observable(true);
+
+    function getEventTarget(e) {
+        e = e || window.event;
+        return e.target || e.srcElement; 
+    }
+
+    var ul = document.getElementById('results');
+    ul.onclick = function(event) {
+        var target = getEventTarget(event);
+        alert(target.innerHTML);
+    };
 
     this.marker = new google.maps.Marker({
         position: new google.maps.LatLng(data.location.lat, data.location.lng),
@@ -40,25 +51,34 @@ var Loc = function(data) {
             var streetViewService = new google.maps.StreetViewService();
             var radius = 500;
     
-            function getStreetView(data, status) {
-                if (status == google.maps.StreetViewStatus.OK) {
-                    var nearStreetViewLoc = data.location.latLng;
-                    var heading = google.maps.geometry.spherical.computeHeading(
-                        nearStreetViewLoc, marker.position);
-                    infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>');
-                        var panoramaOptions = {
-                            position: nearStreetViewLoc,
-                            pov: {
-                                heading: heading,
-                                pitch: 0
-                            }
-                        };
-                    var panorama = new google.maps.StreetViewPanorama(
-                        document.getElementById('pano'), panoramaOptions);
-                } else {
-                    infowindow.setContent('<div>' + marker.title + '</div>' + 
-                        '<div>No Street View Found</div>');
+            try {
+                function getStreetView(data, status) {
+                    if (status == google.maps.StreetViewStatus.OK) {
+                        console.log("worked")
+                        var nearStreetViewLoc = data.location.latLng;
+                        var heading = google.maps.geometry.spherical.computeHeading(
+                            nearStreetViewLoc, marker.position);
+                        infowindow.setContent('<div id="pano"></div>');
+                            console.log("still working")
+                            var panoramaOptions = {
+                                position: nearStreetViewLoc,
+                                pov: {
+                                    heading: heading,
+                                    pitch: 0
+                                }
+                            };
+                        var panorama = new google.maps.StreetViewPanorama(
+                            document.getElementById('pano'), panoramaOptions);
+                            console.log("loaded")
+                    } else {
+                        infowindow.setContent('<div>' + marker.title + '</div>' + 
+                            '<div>No Street View Found</div>');
+                            console.log("didnt work")
+                    }
                 }
+            }
+            catch (err) {
+                infowindow.setContent('<div>didn\'t work')
             }
     
             streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
