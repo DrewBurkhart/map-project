@@ -96,25 +96,49 @@ function mapError() {
     $('#map').html('Google Maps failed. Please try again.');
 }
 
+function mapStyles(val) {
+    if (val == '1') {
+        styles = mapStyles;
+    } else if (val == '2') {
+        styles = mapStyles2;
+    } else {
+        styles = null;
+    }
+}
+
 function MapVM() {
     var self = this;
-    // TODO: ALLOW MAP STYLES TO BE CHANGED BY USER
-    //var styles = mapStyles2;
     var locs = initLocs;
+    var styles = styles;
 
     this.toggleSymbol = ko.observable('hide');
     this.filter = ko.observable('');
     this.locList = ko.observableArray([]);
+    this.styles = ko.observable('')
 
     // Constructor creates a new map -- only center and zoom are required
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.780000, lng: -122.459500},
         zoom: 13,
         //mapTypeId: 'hybrid',
-        //styles: styles,
+        if (styles) {
+            styles: styles
+        },
         mapTypeControl: false
     });
     map.setTilt(45);
+
+    var styleSelector = document.getElementById('styleSelect')
+
+    this.styles = function() {
+        if (styleSelector.value == '1') {
+            this.styles = mapStyles;
+        } else if (styleSelector.value == '2') {
+            styles = mapStyles2;
+        } else {
+            styles = null;
+        }
+    }
 
     this.listToggle = function() {
         if(self.toggleSymbol() === 'hide') {

@@ -14,7 +14,17 @@
     <!-- Search -->
     <div class="search" id="search">
 		<input placeholder="Search Your Place of Interest" class="search-box" id="search-box" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+		<div class="drop" id="drop">
+			<select id ="styleSelect" onchange="mapStyles(this.value)">
+				<option value="1">Map Style 1</option>
+				<option value="2">Map Style 2</option>
+				<option value="3">No Map Styles</option>
+			</select>
+		</div>
 	</div>
+
+	<!-- Dropdown -->
+	
 
 	<!-- List -->
 	<div class="list text-center" id="list">
