@@ -120,7 +120,6 @@ function MapVM() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.780000, lng: -122.459500},
         zoom: 13,
-        //mapTypeId: 'hybrid',
         if (styles) {
             styles: styles
         },
@@ -174,43 +173,6 @@ function MapVM() {
 
 /* TODO: MAKE GROUPS OF LOCATIONS AND ALLOW THEM TO BE SHOWN
     AND HIDDEN BY THE USER */
-
-/*     for (var n = 0; n < locTypes().length; n++) {
-        for (var i = 0; i < locTypes()[n].locs[i].length; i++) {
-            var position = locTypes()[n].locs[i].location;
-            var title = locTypes()[n].locs[i].title;
-            var marker = new google.maps.Marker({
-                position: position,
-                title: title,
-                animation: google.maps.Animation.DROP,
-                id: i,
-                icon: locTypes()[n].locs[i].img
-            });
-    
-            locTypes()[n].markers.push(marker);
-            bounds.extend(marker.position);
-    
-            marker.addListener('click', function() {
-                populateInfoWindow(this, largeInfoWindow);
-            });
-        }
-    }
-
-    function showType(locType) {
-        var self = this;
-        var bounds = new google.maps.LatLngBounds();
-        for (var i = 0; i < locType.markers.length; i++) {
-            locType.markers[i].setMap(map);
-            bounds.extend(locType.markers[i].position);
-        }
-        map.fitBounds(bounds);
-    }
-
-    function hideType() {
-        for (var i = 0; i < locType.markers.length; i++) {
-            locType.markers[i].setMap(null);
-        }
-    } */
 }
 
 function App() {
